@@ -1,0 +1,434 @@
+@charset "UTF-8";
+body {
+    font-family: "Futura",Helvetica, sans-serif;
+}
+
+:root {
+    --background-navbar: rgba(55, 55, 55, 0.98);
+}
+
+.container {
+    max-width: 1000px;
+
+    /* 中央揃え */
+    text-align: center; 
+}
+
+a {
+    /* テキストに装飾を加えない */
+    text-decoration: none;    
+}
+li {
+    /* マーカーを非表示 */
+    list-style: none;
+}
+
+.section-title {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    
+    /* 1rem=6px */
+    font-size: 2rem;
+
+    /* 要素を横に並べながら幅や高さを指定 */
+    display: inline-block;
+
+    /* 要素の下側の境界線に実線を表示する指定 */
+    border-bottom: solid 5px #38b6ff;
+    
+}
+
+/* nav */
+.header {
+    /* background プロパティに var() 関数を使って変数を挿入することで、
+    背景色や背景画像などを指定できる */
+    background: var(--background-navbar);
+
+    /* 要素を固定 */
+    position: fixed;  
+
+    width: 100%;
+    height: 80px;
+    display: flex;
+
+    /* 横並びの要素を両端揃えで均等に配置する指定 */
+    justify-content: space-between;
+
+    /* Flexbox を使用して要素を上下中央寄せにする*/
+    align-items: center;
+
+    /* ブロックの重なり順を指定 */
+    z-index: 999;
+
+    padding: 0 20px;
+
+    /* 要素の幅や高さにパディングやボーダーのサイズを含めることを指定する */
+    box-sizing: border-box;
+}
+
+.navtext {
+    /* テキストをすべて大文字に変換 */
+    text-transform: uppercase;
+
+    color:#ddd;
+    letter-spacing: 4px;
+    font-size: 20px;
+}
+
+.menu-icon {
+    display: inline-block; 
+
+    /* 元の位置を基準に動かせる */
+    position: relative;
+
+    /* マウスカーソルを設定 */
+    cursor: pointer;
+
+    padding: 25px 15px;
+
+    /* タップ時の青いハイライトの色を変更 */
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+    z-index: 1000;
+}
+
+.navicon {
+    background: #ddd;
+    display: block;
+    height: 3px;
+    width: 26px;
+
+    /* 横幅いっぱいに広がる（親の幅に合わせる）
+    上下に改行が入る（＝他の要素がその横に来ない） */
+    position: relative;
+
+    /* アニメーションのような“なめらかな変化
+    ease 変化のスピードの“カーブ”（速く始まって、ゆっくり終わる） */
+    transition: 0.3s ease;
+}
+
+.navicon:before {
+    top: 9px;
+  }
+
+.navicon:after {
+    bottom: 9px;
+  }
+
+.navicon:before, .navicon:after {
+    content:"";
+    /* 空のコンテンツを生成することにより、CSSだけで装飾的な要素
+    （線・アイコン・疑似ボックスなど）を追加できる */
+
+    display: block;
+    height: 100%;
+    width: 100%;
+
+    /* 「親の中の特定の位置」にぴったり配置できる */
+    position: absolute;
+
+    background: #ddd;
+    transition: 0.3s ease;
+}
+
+.menu-btn {
+    display: none;
+}
+
+.menu {
+    list-style: none;
+    position: absolute;
+    top: 52px;
+    left: 0;
+    width: 100%;
+    background: var(--background-navbar);
+    margin: 0;
+    padding: 0 0 10px 0;
+
+    /* 縦方向にアニメーションで出し入れするため */
+    transform: scaleY(0);
+
+    /* 変形の基準点を 上側（top）にする */
+    transform-origin: top;
+
+    transition: transform 0.3s ease;
+    z-index: 1000;
+}
+
+.menu-btn:checked ~ .menu {
+    /* 通常の大きさ（100% 表示） */
+    transform: scaleY(1);
+}
+
+.menu li {
+    border-top: 1px solid rgb(75, 75, 75);
+    padding: 15px 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.menu a {
+    text-decoration: none;
+    font-weight: 500;
+    letter-spacing: 2px;
+    font-size: 16px;
+    color: #ddd;
+
+    /* 完全に透明 */
+    opacity: 0;
+    
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.menu a:hover {
+    color: #38b6ff;  
+}
+
+
+.menu-btn:checked ~ .menu li,
+  .menu-btn:checked ~ .menu a {
+    /* 不透明 */
+    opacity: 1;
+}
+
+.menu-btn:checked ~ .menu-icon .navicon {
+    /* 背景を完全に透明にする */
+    background: transparent;
+}
+  
+  .menu-btn:checked ~ .menu-icon .navicon:before {
+    /* 要素を 左回りに45度回転 させる */
+    transform: rotate(-45deg);
+    top: 0;
+}
+  
+  .menu-btn:checked ~ .menu-icon .navicon:after {
+    /* 要素を 右回りに45度回転 させる */
+    transform: rotate(45deg);
+    bottom: 0;
+}
+
+/* mainvisual */
+#mainvisual img {
+    width: 100%;
+
+    /* Viewport Height(画面（ウィンドウ）の高さを 100 としたときの 割合) */
+    height: 75vh;
+  }
+
+/* about */
+#about {
+    margin: 0 auto;
+    
+}
+#about .content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: left; 
+}
+
+#about .content-title {
+    margin-bottom: 30px;
+}
+
+#about img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin-right: 30px;
+}
+
+/* blog */
+#blog {
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+
+#blog ul {
+display: flex;
+justify-content: space-between;
+}
+#blog li { 
+   width: calc(33.333% - 20px);
+   margin-bottom: 30px;
+   
+   text-align: center;
+}
+
+#blog img {
+    width: 100%;
+    height: auto;
+    display: block;    
+}
+
+.content-title {
+    display: block;
+    padding: 1.5rem 1rem; 
+    color: black;
+    
+    
+}
+
+.content-title a {
+    color: black; 
+   
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.content-title a:hover {
+   color: #38b6ff;
+  
+}
+
+/* Contact */
+#contact {
+    margin: 0 auto;
+}
+
+form {
+   max-width: 800px;
+   margin: 0 auto;
+   padding: 20px;
+   background-color: #f9f9f9;
+   border-radius: 8px;
+   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;    
+}
+
+form input, form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+form input:focus,form textarea:focus {
+    outline: none;
+    border-color: #38b6ff;
+    box-shadow: 0 0 5px rgba(56, 182, 255, 0.5);
+}
+
+form button {
+    background-color: #38b6ff;
+    color: white;
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #269fd8; 
+}
+
+/* footer */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+
+.footer {
+    padding: 1rem;
+    font-size: 20px;
+    border-top: 1px solid #e5e7eb;
+    background-color: #f9f9f9;
+    margin-top: 100px;
+    
+    
+}
+
+.footer a:hover {
+    color:#269fd8;
+}
+
+.footer-inner {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 40px;
+}
+.footer-nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    
+}
+
+.footer-nav a {
+    color: #000;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.footer-nav a:hover {
+    color: #38b6ff;  
+}
+
+@media (max-width: 760px) {
+    html, body {
+        overflow-x: hidden;
+    }
+    .header {
+      padding: 0 10px;
+    }
+    #mainvisual img {
+      height: 45vh;
+    }
+    #about .content {
+        flex-direction: column;
+        text-align: center;
+      }
+
+    #about img {
+        margin: 0 20px;
+      }
+
+    #blog ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;    
+    }
+
+    #blog li {
+        width: 80%; 
+    }
+
+    #contact {
+        width: 80%;
+    }
+    .footer-inner {
+        flex-direction: column;      
+        align-items: center;         
+        gap: 10px;                   
+        
+      }
+    
+      .footer-nav {
+        flex-direction: column;    
+        align-items: center;
+        flex-direction: row; 
+      }
+      
+      .footer-nav a {
+        font-size: 14px;             
+      }
+    
+      .copyright {
+        font-size: 14px;
+      }  
+}
+
+
+        
+   
+
