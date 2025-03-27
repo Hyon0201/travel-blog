@@ -220,7 +220,8 @@ li {
 
   .swiper-button-next,
   .swiper-button-prev {
-    color: #38b6ff; 
+    color: #ffffff; 
+    margin-top: 10px;
   }
 
 
